@@ -1,0 +1,32 @@
+version: '3'
+services:
+  # React App Service
+  react-app:
+    image: pouzani/react-voiture:1.0
+    ports:
+      - "3000:3000"
+
+  # Spring Boot App Service
+  spring-app:
+    image: pouzani/spring-voiture:1.1
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    networks:
+      - my-network
+
+  # PostgreSQL Service
+  postgres:
+    image: postgres
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: fullstack
+    ports:
+      - "5432:5432"
+    networks:
+      - my-network
+
+networks:
+  my-network:
