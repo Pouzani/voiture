@@ -8,23 +8,24 @@ services:
 
   # Spring Boot App Service
   spring-app:
-    image: pouzani/spring-voiture:1.1
+    image: pouzani/spring-voiture:2.1
     ports:
       - "8080:8080"
     depends_on:
-      - postgres
+      - mysql
     networks:
       - my-network
 
-  # PostgreSQL Service
-  postgres:
-    image: postgres
+  # MySQL Service
+  mysql:
+    image: mysql
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: fullstack
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: fullstack
+      MYSQL_USER: mysql
+      MYSQL_PASSWORD: mysql
     ports:
-      - "5432:5432"
+      - "3306:3306"
     networks:
       - my-network
 
